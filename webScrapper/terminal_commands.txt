@@ -1,0 +1,5 @@
+Run the script (default: new session, scrapes all 13 sources and writes DB):
+python scrape_and_save.py
+
+(Optional) Ask the script to use only specific sources (max 5):
+python scrape_and_save.py --selected src_techcrunch,src_hbr --user-id lakshita --topic "AI Branding"

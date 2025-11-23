@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const Dashboard = () => {
-  return (
-    <div>
-      My Dashboard
-    </div>
-  )
-}
-
-export default Dashboard
-=======
-// src/components/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase'; // Import Firestore
@@ -121,56 +107,83 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto p-8 max-w-4xl">
-      <div className="bg-white p-6 rounded-lg shadow-xl mb-8">
-        <h2 className="text-2xl font-bold mb-4">
+    <div className="container mx-auto p-6 max-w-5xl">
+
+      {/* Create Post Section */}
+      <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 mb-10">
+        <h2 className="text-3xl font-bold mb-3 tracking-tight">
           {editingDraft ? "Edit Draft" : "Create New Post"}
         </h2>
+        <p className="text-gray-500 mb-6">
+          Share your thoughts or save them for later.
+        </p>
+
         <textarea
-          className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+          className="w-full h-44 p-4 border border-gray-300 rounded-xl 
+                    focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                    transition-all duration-300 resize-none"
           placeholder="What do you want to talk about?"
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
         ></textarea>
-        <div className="flex justify-end space-x-4 mt-4">
+
+        <div className="flex justify-end space-x-4 mt-6">
           {editingDraft && (
             <button
               onClick={() => { setEditingDraft(null); setPostContent(''); }}
-              className="py-2 px-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+              className="py-2.5 px-5 bg-gray-600 text-white rounded-xl 
+                        hover:bg-gray-700 transition-all"
             >
               Cancel Edit
             </button>
           )}
+
           <button
             onClick={handleSaveDraft}
-            className="py-2 px-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="py-2.5 px-7 bg-gradient-to-r from-blue-600 to-purple-600 
+                      text-white rounded-xl font-medium shadow-md 
+                      hover:shadow-lg hover:scale-[1.03] transition-all"
           >
             {editingDraft ? "Update Draft" : "Save Draft"}
           </button>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-xl">
-        <h2 className="text-2xl font-bold mb-4">Your Drafts</h2>
-        {loading && <p>Loading drafts...</p>}
-        {!loading && drafts.length === 0 && <p>You have no saved drafts.</p>}
-        <div className="space-y-4">
+      {/* Drafts Section */}
+      <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+        <h2 className="text-3xl font-bold mb-4 tracking-tight">Your Drafts</h2>
+
+        {loading && <p className="text-gray-500">Loading drafts...</p>}
+        {!loading && drafts.length === 0 && (
+          <p className="text-gray-500">You have no saved drafts.</p>
+        )}
+
+        <div className="space-y-6 mt-4">
           {drafts.map((draft) => (
-            <div key={draft.id} className="border border-gray-200 p-4 rounded-lg">
-              <p className="text-gray-700 whitespace-pre-wrap">{draft.content}</p>
-              <p className="text-sm text-gray-400 mt-2">
-                Saved: {draft.createdAt.toDate().toLocaleString()}
+            <div
+              key={draft.id}
+              className="border border-gray-200 p-5 rounded-xl hover:shadow-md 
+                        transition-all bg-white"
+            >
+              <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">
+                {draft.content}
               </p>
-              <div className="flex justify-end space-x-2 mt-2">
+
+              <p className="text-sm text-gray-400 mt-2">
+                Saved: {draft.createdAt?.toDate().toLocaleString()}
+              </p>
+
+              <div className="flex justify-end space-x-4 mt-3">
                 <button
                   onClick={() => handleEditDraft(draft)}
-                  className="text-sm text-blue-600 hover:underline"
+                  className="text-sm text-blue-600 font-medium hover:underline"
                 >
                   Edit
                 </button>
+
                 <button
                   onClick={() => handleDeleteDraft(draft.id)}
-                  className="text-sm text-red-600 hover:underline"
+                  className="text-sm text-red-600 font-medium hover:underline"
                 >
                   Delete
                 </button>
@@ -179,9 +192,10 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
+
     </div>
   );
+
 };
 
 export default Dashboard;
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7

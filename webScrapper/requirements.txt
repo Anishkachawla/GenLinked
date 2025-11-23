@@ -1,0 +1,3 @@
+pip install feedparser python-dateutil requests beautifulsoup4 trafilatura readability-lxml newspaper3k langdetect pymongo
+# optional for exact token chunking:
+pip install tiktoken

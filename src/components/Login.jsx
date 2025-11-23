@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-=======
-// src/components/Login.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -12,36 +8,10 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../firebase'; // Correct path to firebase.js
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-<<<<<<< HEAD
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleEmailLogin = (e) => {
-    e.preventDefault();
-    // Handle email/password login logic here
-    console.log('Email login:', { email, password, isSignUp });
-    // Redirect to dashboard
-    window.location.href = '/dashboard';
-  };
-
-  const handleGoogleLogin = () => {
-    // Handle Google OAuth login
-    console.log('Google login clicked');
-    // Redirect to dashboard after successful auth
-    window.location.href = '/dashboard';
-  };
-
-  const handleLinkedInLogin = () => {
-    // Handle LinkedIn OAuth login
-    console.log('LinkedIn login clicked');
-    // Redirect to dashboard after successful auth
-    window.location.href = '/dashboard';
-=======
   const [isSignUp, setIsSignUp] = useState(false); // State to toggle between Sign In and Sign Up forms
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(''); // State to display Firebase auth errors
@@ -145,7 +115,6 @@ const Login = () => {
   const handleLinkedInLogin = () => {
     setError('LinkedIn authentication requires a custom backend setup and is not yet implemented.');
     console.log('LinkedIn login clicked (custom auth needed)');
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
   };
 
   return (
@@ -161,11 +130,7 @@ const Login = () => {
         <div className="text-center">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-<<<<<<< HEAD
               <i className="fas fa-file-alt text-white text-2xl"></i>
-=======
-              <i className="fas fa-file-alt text-white text-2xl"></i> {/* Font Awesome icon */}
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
             </div>
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
@@ -178,8 +143,6 @@ const Login = () => {
 
         {/* Login Form */}
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-<<<<<<< HEAD
-=======
           {/* Error Message Display */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -187,33 +150,21 @@ const Login = () => {
             </div>
           )}
 
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-6">
             <button
               onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200 hover:shadow-md"
             >
-<<<<<<< HEAD
-              <i className="fab fa-google text-red-500 text-lg mr-3"></i>
-              Continue with Google
-            </button>
-            
-=======
               <i className="fab fa-google text-red-500 text-lg mr-3"></i> {/* Font Awesome icon */}
               Continue with Google
             </button>
 
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
             <button
               onClick={handleLinkedInLogin}
               className="w-full flex items-center justify-center px-4 py-3 border border-blue-300 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 hover:shadow-md"
             >
-<<<<<<< HEAD
-              <i className="fab fa-linkedin text-white text-lg mr-3"></i>
-=======
               <i className="fab fa-linkedin text-white text-lg mr-3"></i> {/* Font Awesome icon */}
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
               Continue with LinkedIn
             </button>
           </div>
@@ -229,78 +180,6 @@ const Login = () => {
           </div>
 
           {/* Email Form */}
-<<<<<<< HEAD
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email address
-              </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                  placeholder="Enter your email"
-                />
-                <i className="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                  placeholder="Enter your password"
-                />
-                <i className="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                </button>
-              </div>
-            </div>
-
-            {!isSignUp && (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
-                  />
-                  <label className="ml-2 block text-sm text-gray-700">
-                    Remember me
-                  </label>
-                </div>
-                <button
-                  type="button"
-                  className="text-sm text-blue-600 hover:text-blue-500 cursor-pointer"
-                >
-                  Forgot password?
-                </button>
-              </div>
-            )}
-
-            <button
-              onClick={handleEmailLogin}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              <i className={`fas ${isSignUp ? 'fa-user-plus' : 'fa-sign-in-alt'} mr-2`}></i>
-              {isSignUp ? 'Create Account' : 'Sign In'}
-            </button>
-          </div>
-=======
           <form onSubmit={handleEmailAuth}> {/* Form now handles both Sign In and Sign Up */}
             <div className="space-y-4">
               <div>
@@ -375,22 +254,17 @@ const Login = () => {
               </button>
             </div>
           </form>
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
 
           {/* Toggle Sign Up / Sign In */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               {isSignUp ? 'Already have an account?' : "Don't have an account?"}
               <button
-<<<<<<< HEAD
-                onClick={() => setIsSignUp(!isSignUp)}
-=======
                 onClick={(e) => {
                     e.preventDefault(); // Prevent default if button is inside a form
                     setIsSignUp(!isSignUp);
                     setError(''); // Clear errors when toggling mode
                 }}
->>>>>>> 6b7fac3d94f4d5d2ff3e45fb17a16b8e0cc0edc7
                 className="ml-1 text-blue-600 hover:text-blue-500 font-medium"
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
