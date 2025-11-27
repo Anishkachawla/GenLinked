@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Check if MONGODB_URI is loaded
 if (!process.env.MONGODB_URI) {
-  console.error('❌ FATAL: MONGODB_URI is not defined in environment variables!');
+  console.error('FATAL: MONGODB_URI is not defined in environment variables!');
   console.error('Make sure your .env file exists in the backend folder with:');
   console.error('MONGODB_URI=mongodb+srv://...');
   process.exit(1);
@@ -26,23 +26,23 @@ async function withDb(callback) {
   try {
     console.log('Connecting to MongoDB...');
     client = await MongoClient.connect(MONGODB_URI);
-    console.log('✅ MongoDB connected');
+    console.log('MongoDB connected');
     const db = client.db(DB_NAME);
     return await callback(db);
   } catch (error) {
-    console.error('❌ Database connection error:', error.message);
+    console.error('Database connection error:', error.message);
     throw error;
   } finally {
     if (client) {
       await client.close();
-      console.log('✅ MongoDB connection closed');
+      console.log('MongoDB connection closed');
     }
   }
 }
 
 // Get all articles
 router.get('/', async (req, res) => {
-  console.log('📥 GET /api/articles - Fetching all articles');
+  console.log('GET /api/articles - Fetching all articles');
   try {
     const articles = await withDb(async (db) => {
       const result = await db
@@ -52,13 +52,13 @@ router.get('/', async (req, res) => {
         .limit(50)
         .toArray();
       
-      console.log(`✅ Found ${result.length} articles`);
+      console.log(`Found ${result.length} articles`);
       return result;
     });
     
     res.json({ success: true, articles });
   } catch (error) {
-    console.error('❌ Error fetching articles:', error.message);
+    console.error('Error fetching articles:', error.message);
     res.status(500).json({ 
       success: false, 
       error: error.message || 'Failed to fetch articles'
@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
 
 // Get single article by ID
 router.get('/:id', async (req, res) => {
-  console.log(`📥 GET /api/articles/${req.params.id} - Fetching single article`);
+  console.log(`GET /api/articles/${req.params.id} - Fetching single article`);
   try {
     const article = await withDb(async (db) => {
       return db
@@ -77,14 +77,14 @@ router.get('/:id', async (req, res) => {
     });
     
     if (!article) {
-      console.log('❌ Article not found');
+      console.log('Article not found');
       return res.status(404).json({ success: false, error: 'Article not found' });
     }
     
-    console.log('✅ Article found:', article.title);
+    console.log('Article found:', article.title);
     res.json({ success: true, article });
   } catch (error) {
-    console.error('❌ Error fetching article:', error.message);
+    console.error('Error fetching article:', error.message);
     res.status(500).json({ 
       success: false, 
       error: error.message || 'Failed to fetch article'
@@ -94,7 +94,7 @@ router.get('/:id', async (req, res) => {
 
 // Gemini summarization
 router.post('/summarize', async (req, res) => {
-  console.log('📥 POST /api/articles/summarize (Gemini)');
+  console.log('POST /api/articles/summarize (Gemini)');
   
   try {
     const { text } = req.body;
@@ -128,7 +128,7 @@ router.post('/summarize', async (req, res) => {
 
     console.log("Gemini Request URL:", GEMINI_URL);
 
-    console.log('🤖 Calling Gemini API...');
+    console.log('Calling Gemini API...');
 
     const response = await fetch(GEMINI_URL, {
       method: "POST",
@@ -145,7 +145,7 @@ router.post('/summarize', async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("❌ Gemini API error:", JSON.stringify(data, null, 2));
+      console.error("Gemini API error:", JSON.stringify(data, null, 2));
       return res.status(500).json({
         success: false,
         error: data.error?.message || "Gemini API failed"
@@ -161,11 +161,11 @@ router.post('/summarize', async (req, res) => {
       });
     }
 
-    console.log('✅ Summary generated');
+    console.log('Summary generated');
     res.json({ success: true, summary });
 
   } catch (error) {
-    console.error('❌ Error in /summarize:', error.message);
+    console.error('Error in /summarize:', error.message);
     res.status(500).json({
       success: false,
       error: error.message || 'Unexpected server error'

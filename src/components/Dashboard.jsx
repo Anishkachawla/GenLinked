@@ -59,7 +59,7 @@ const Dashboard = () => {
     const draftFromLinkedIn = localStorage.getItem("generatedPostDraft");
 
     if (draftFromLinkedIn) {
-      console.log("🔥 Importing LinkedIn draft instantly...");
+      console.log("Importing LinkedIn draft instantly...");
 
       addDoc(collection(db, "drafts"), {
         userId: currentUser.uid,
@@ -70,7 +70,7 @@ const Dashboard = () => {
 
       localStorage.removeItem("generatedPostDraft");
 
-      // Optional: Show toast
+      //Show toast
       alert("LinkedIn post draft added to Dashboard!");
     }
   }, [currentUser]);
@@ -138,9 +138,7 @@ const Dashboard = () => {
         <p className="text-gray-500 mb-6">Share your thoughts or save them for later.</p>
 
         <textarea
-          className="w-full h-44 p-4 border border-gray-300 rounded-xl 
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                     transition-all duration-300 resize-none"
+          className="w-full h-44 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none"
           placeholder="What do you want to talk about?"
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
@@ -158,9 +156,7 @@ const Dashboard = () => {
 
           <button
             onClick={handleSaveDraft}
-            className="py-2.5 px-7 bg-gradient-to-r from-blue-600 to-purple-600 
-                       text-white rounded-xl font-medium shadow-md 
-                       hover:shadow-lg hover:scale-[1.03] transition"
+            className="py-2.5 px-7 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium shadow-md hover:shadow-lg hover:scale-[1.03] transition"
           >
             {editingDraft ? "Update Draft" : "Save Draft"}
           </button>

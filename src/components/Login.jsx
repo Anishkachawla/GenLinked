@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { auth } from '../firebase'; // Correct path to firebase.js
+import { auth } from '../firebase';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -265,7 +265,7 @@ const Login = () => {
                     setIsSignUp(!isSignUp);
                     setError(''); // Clear errors when toggling mode
                 }}
-                className="ml-1 text-blue-600 hover:text-blue-500 font-medium"
+                className="ml-1 text-blue-600 hover:text-blue-500 font-medium cursor-pointer"
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
               </button>

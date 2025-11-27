@@ -415,17 +415,7 @@ const ScrapArticles = () => {
                 {/* Read More (Light Purple Gradient) */}
                 <button
                   onClick={() => handleReadMore(article)}
-                  className="
-                    inline-flex items-center gap-2
-                    px-4 py-2.5
-                    rounded-lg text-sm font-medium
-                    text-white
-                    bg-gradient-to-r from-indigo-400 to-purple-500
-                    hover:from-indigo-500 hover:to-purple-600
-                    shadow-sm hover:shadow-md hover:-translate-y-[2px]
-                    transition-all duration-200
-                    whitespace-nowrap
-                  "
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-indigo-400 to-purple-500 hover:from-indigo-500 hover:to-purple-600 shadow-sm hover:shadow-md hover:-translate-y-[2px] transition-all duration-200 whitespace-nowrap"
                 >
                   <i className="fas fa-book-open text-white text-sm"></i>
                   Read More
@@ -434,17 +424,7 @@ const ScrapArticles = () => {
                 {/* AI Summary (Outline Blue) */}
                 <button
                   onClick={() => handleSummarize(article)}
-                  className="
-                    inline-flex items-center gap-2
-                    px-4 py-2.5
-                    rounded-lg text-sm font-medium
-                    text-blue-600 bg-white 
-                    border border-blue-300
-                    hover:bg-blue-50 
-                    shadow-sm hover:shadow-md hover:-translate-y-[2px]
-                    transition-all duration-200
-                    whitespace-nowrap
-                  "
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-blue-600 bg-white border border-blue-300 hover:bg-blue-50 shadow-sm hover:shadow-md hover:-translate-y-[2px] transition-all duration-200 whitespace-nowrap"
                 >
                   <i className="fas fa-bolt text-blue-600 text-sm"></i>
                   AI Summary
@@ -453,15 +433,7 @@ const ScrapArticles = () => {
                 {/* LinkedIn Post (Compact Width) */}
                 <button
                   onClick={() => handleGenerateLinkedInPost(article)}
-                  className="
-                    inline-flex items-center gap-1
-                    px-2 py-0
-                    rounded-md text-sm font-medium
-                    bg-[#0A66C2] text-white
-                    hover:bg-[#0654a8]
-                    shadow-sm hover:shadow-md hover:-translate-y-[2px]
-                    transition-all duration-200
-                  "
+                  className="inline-flex items-center gap-1 px-2 py-0 rounded-md text-sm font-medium bg-[#0A66C2] text-white hover:bg-[#0654a8] shadow-sm hover:shadow-md hover:-translate-y-[2px] transition-all duration-200"
                 >
                   <i className="fab fa-linkedin text-white text-base"></i>
                   Generate Draft
