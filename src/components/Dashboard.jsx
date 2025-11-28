@@ -1,4 +1,3 @@
-// src/components/Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase";
@@ -27,9 +26,7 @@ const Dashboard = () => {
   const [linkedinConnected, setLinkedInConnected] = useState(false);
   const [checkingLinkedInStatus, setCheckingLinkedInStatus] = useState(true);
 
-  /* =============================================================
-     1. Load Drafts (REALTIME)
-  ============================================================= */
+  //  1. Load Drafts (REALTIME)
   useEffect(() => {
     if (!currentUser) return;
 
@@ -54,9 +51,30 @@ const Dashboard = () => {
     return () => unsubscribe();
   }, [currentUser]);
 
-  /* =============================================================
-     2. Check LinkedIn Token in Firestore
-  ============================================================= */
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const generatedDraft = localStorage.getItem("generatedPostDraft");
+
+    if (generatedDraft) {
+      console.log("Importing LinkedIn-generated draft...");
+
+      addDoc(collection(db, "drafts"), {
+        userId: currentUser.uid,
+        content: generatedDraft,
+        status: "draft",
+        createdAt: new Date(),
+      });
+
+      // remove so it doesn't import twice
+      localStorage.removeItem("generatedPostDraft");
+
+      alert("LinkedIn-style draft added to your Dashboard!");
+    }
+  }, [currentUser]);
+
+  
+  //  2. Check LinkedIn Token in Firestore
   useEffect(() => {
     if (!currentUser) return;
 
@@ -82,9 +100,8 @@ const Dashboard = () => {
     check();
   }, [currentUser]);
 
-  /* =============================================================
-     3. Save Draft
-  ============================================================= */
+  
+  //  3. Save Draft
   const handleSaveDraft = async () => {
     if (!postContent.trim()) return;
 
@@ -114,9 +131,8 @@ const Dashboard = () => {
     setLoading(false);
   };
 
-  /* =============================================================
-     4. Publish to LinkedIn (GEN-2 HTTP API)
-  ============================================================= */
+  
+  //  4. Publish to LinkedIn (GEN-2 HTTP API)
   const handlePublish = async () => {
     if (!postContent.trim()) return alert("Content empty.");
     if (!linkedinConnected) return alert("Connect LinkedIn first.");
@@ -185,9 +201,8 @@ const Dashboard = () => {
     setLoading(false);
   };
 
-  /* =============================================================
-     5. Connect LinkedIn
-  ============================================================= */
+  
+  //  5. Connect LinkedIn
   const handleConnectLinkedIn = () => {
     const CLIENT_ID = "86fl92ig4lm11e";
     const REDIRECT_URI =
@@ -203,9 +218,8 @@ const Dashboard = () => {
     window.location.href = url;
   };
 
-  /* =============================================================
-     UI
-  ============================================================= */
+  
+  // UI
   return (
     <div className="container mx-auto p-8 max-w-4xl">
       {/* LinkedIn Section */}
@@ -238,6 +252,7 @@ const Dashboard = () => {
           className="w-full h-40 p-3 border rounded-lg resize-none"
           disabled={loading}
           value={postContent}
+          placeholder="What do you want to talk about?"
           onChange={(e) => setPostContent(e.target.value)}
         />
 
