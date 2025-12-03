@@ -1,4 +1,4 @@
-# Agentic AI for LinkedIn Personal Brand Builder / Post Generator
+# GenLinked - Agentic AI for LinkedIn Personal Brand Builder / Post Generator
 
 A web-based AI-powered platform that automates discovering industry news, summarizing content, and generating LinkedIn-ready posts — helping professionals stay active and grow their personal brand effortlessly.
 
