@@ -73,8 +73,4 @@ if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
-module.exports = app; // Vercel needs this
-
-// Add the export for Vercel's Serverless Function entry point
-// export default app;
-module.exports = app;
+export default app;
