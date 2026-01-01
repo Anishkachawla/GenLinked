@@ -68,11 +68,12 @@ app.use((err, req, res, next) => {
 //   console.log(`Health: http://localhost:${PORT}/health\n`);
 // });
 
-// if (process.env.NODE_ENV !== 'production' && process.env.VERCEL !== '1') {
-//   app.listen(PORT, () => {
-//     console.log(`\nServer running on port ${PORT}`);
-//   });
-// }
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app; // Vercel needs this
 
 // Add the export for Vercel's Serverless Function entry point
 // export default app;
