@@ -75,4 +75,5 @@ app.use((err, req, res, next) => {
 // }
 
 // Add the export for Vercel's Serverless Function entry point
-export default app;
+// export default app;
+module.exports = app;

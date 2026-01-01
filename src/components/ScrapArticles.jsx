@@ -11,7 +11,7 @@ const ScrapArticles = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All');
 
-  const API_BASE_URL = 'https://genlinked.vercel.app/api';
+  const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api';
 
   useEffect(() => {
     fetchArticles();
