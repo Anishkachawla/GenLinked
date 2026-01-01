@@ -3,7 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 // Load environment variables FIRST
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 import articlesRouter from './routes/articles.js';
 
