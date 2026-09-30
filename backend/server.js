@@ -82,5 +82,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // THIS IS REQUIRED FOR VERCEL
-export default app; 
-// (If you are using CommonJS require(), use: module.exports = app;)
+export default app;
