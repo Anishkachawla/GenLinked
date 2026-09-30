@@ -53,8 +53,9 @@ async function connectToDatabase() {
   return db;
 }
 
-// Update your routes to use it like this:
+// Get all articles
 router.get('/', async (req, res) => {
+  console.log('GET /api/articles - Fetching all articles');
   try {
     const db = await connectToDatabase();
     const articles = await db.collection(ARTICLES_COLLECTION)
@@ -63,47 +64,21 @@ router.get('/', async (req, res) => {
       .limit(50)
       .toArray();
     
+    console.log(`Found ${articles.length} articles`);
     res.json({ success: true, articles });
   } catch (error) {
+    console.error('Error fetching articles:', error.message);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-// Get all articles
-router.get('/', async (req, res) => {
-  console.log('GET /api/articles - Fetching all articles');
-  try {
-    const articles = await withDb(async (db) => {
-      const result = await db
-        .collection(ARTICLES_COLLECTION)
-        .find({})
-        .sort({ created_at: -1 })
-        .limit(50)
-        .toArray();
-      
-      console.log(`Found ${result.length} articles`);
-      return result;
-    });
-    
-    res.json({ success: true, articles });
-  } catch (error) {
-    console.error('Error fetching articles:', error.message);
-    res.status(500).json({ 
-      success: false, 
-      error: error.message || 'Failed to fetch articles'
-    });
-  }
-});
-
-// Get single article by ID
+// Get single article by ID (Updated to use connectToDatabase)
 router.get('/:id', async (req, res) => {
   console.log(`GET /api/articles/${req.params.id} - Fetching single article`);
   try {
-    const article = await withDb(async (db) => {
-      return db
-        .collection(ARTICLES_COLLECTION)
-        .findOne({ _id: new ObjectId(req.params.id) });
-    });
+    const db = await connectToDatabase();
+    const article = await db.collection(ARTICLES_COLLECTION)
+      .findOne({ _id: new ObjectId(req.params.id) });
     
     if (!article) {
       console.log('Article not found');

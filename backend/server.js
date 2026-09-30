@@ -73,9 +73,14 @@ app.use((err, req, res, next) => {
 //   console.log(`Health: http://localhost:${PORT}/health\n`);
 // });
 
+// Only listen on localhost. Vercel will handle the serverless deployment.
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 }
 
-export default app;
+// THIS IS REQUIRED FOR VERCEL
+export default app; 
+// (If you are using CommonJS require(), use: module.exports = app;)
